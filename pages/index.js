@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import {index} from "./api/login";
+import {login} from "./api/login/login";
 
 const schema = yup.object({
     email: yup.string().required('This field is required').email('This field must be an email'),
@@ -20,8 +20,7 @@ export default function App() {
     const onSubmit = async (credentials) => {
         setIsLoading(true);
         try {
-            await index(credentials);
-
+            await login(credentials);
         } catch (error) {
             setError(error);
         }
