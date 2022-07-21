@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import PublicLayout from "../components/PublicLayout";
-import Login from "../components/Login/login";
+import Index from "../components/Login";
 
 export default function App() {
     return (
         <PublicLayout>
-            <Login/>
+            <Index/>
         </PublicLayout>
     );
 };
