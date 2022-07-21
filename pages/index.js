@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import {index} from "./api/login";
 
 const schema = yup.object({
     email: yup.string().required('This field is required').email('This field must be an email'),
@@ -12,17 +13,37 @@ export default function App() {
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
     });
-    const onSubmit = data => console.log(data);
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const onSubmit = async (credentials) => {
+        setIsLoading(true);
+        try {
+            await index(credentials);
+
+        } catch (error) {
+            setError(error);
+        }
+        setIsLoading(false);
+    }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("email")} />
-            <p>{errors.email?.message}</p>
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input {...register("email")} />
+                <p>{errors.email?.message}</p>
 
-            <input {...register("password")} />
-            <p>{errors.password?.message}</p>
+                <input {...register("password")} />
+                <p>{errors.password?.message}</p>
 
-            <input type="submit" />
-        </form>
+                <input type="submit" disabled={ isLoading }/>
+                {error && (
+                    <p>
+                        Authentication error: {error.message}
+                    </p>
+                )}
+            </form>
+        </div>
     );
-}
+};

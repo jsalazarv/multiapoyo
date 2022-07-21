@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "@tanstack/react-query": "^4.0.8",
     "@tanstack/react-query-devtools": "^4.0.8",
+    "axios": "^0.27.2",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -20,6 +21,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "dotenv": "^16.0.1",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.2"
   }
