@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import {login} from "../../pages/api/login/login";
+import {authenticate} from "../../pages/api/Auth";
+import {useAuthContext} from "../../hooks/useAuthContext";
 
 const schema = yup.object({
     email: yup.string().required('This field is required').email('This field must be an email'),
@@ -13,18 +14,15 @@ export default function Login() {
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
     });
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const {login, isLoading, isSuccess, isError, isAuthenticated} = useAuthContext();
 
     const onSubmit = async (credentials) => {
-        setIsLoading(true);
         try {
-            await login(credentials);
+           await login(credentials);
         } catch (error) {
-            setError(error);
+            setErrorMessage(error.response?.data?.error);
         }
-        setIsLoading(false);
     }
 
     return (
@@ -36,10 +34,10 @@ export default function Login() {
                 <input {...register("password")} />
                 <p>{errors.password?.message}</p>
 
-                <input type="submit" disabled={ isLoading }/>
-                {error && (
+                <button type="submit" disabled={ isLoading }>Send</button>
+                {isError && (
                     <p>
-                        Authentication error: {error.message}
+                        Authentication error: {errorMessage}
                     </p>
                 )}
             </form>
