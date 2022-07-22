@@ -8,7 +8,7 @@ import {useState} from "react";
 
 
 export default function ({user, onEdit}) {
-    const [isEdit, setIsEdit] = useState(onEdit);
+    const [isEdit, setIsEdit] = useState(false);
 
     const editHandler = () => {
         onEdit && onEdit(user);

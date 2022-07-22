@@ -5,30 +5,41 @@ import {useQuery} from "@tanstack/react-query";
 import UserCard from "../components/UserCard";
 import Title from "../components/common/Title";
 import CardContainer from "../components/common/CardContainer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ToggleSidebar} from "../components/Sidebar";
 import UserEditForm from "../components/UserEditForm";
 
 
 const UserList = () => {
     const {data, isLoading} = useQuery(['userList'], fetchUsers);
-    const [toggle, setToggle] = useState(true);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
-
-    if(isLoading) {
-        return "Loading..."
-    }
-    const {data: userList} = data
+    const [userList, setUserList] = useState([]);
 
     const toggleSidebar = () => {
-        setToggle(!toggle);
+        setIsDrawerOpen(!isDrawerOpen);
     }
-
-    const TitleSidebar = <Title>User modal</Title>;
 
     const onEdit = (user) => {
         toggleSidebar();
         setSelectedUser(user);
+    }
+
+    const setNewData = (user) => {
+        const userIndex = userList.findIndex((item) => item.id === user.id);
+
+        userList[userIndex] = user;
+        setUserList([...userList]);
+
+        setIsDrawerOpen(false);
+    }
+
+    useEffect(() => {
+        data && setUserList(data.data || []);
+    }, [data]);
+
+    if(isLoading) {
+        return "Loading..."
     }
 
     return (
@@ -37,13 +48,13 @@ const UserList = () => {
                 <Title> Users </Title>
             </div>
 
-            <ToggleSidebar open={toggle} onChangeState={setToggle} header={TitleSidebar}>
-                <UserEditForm user={selectedUser}></UserEditForm>
+            <ToggleSidebar open={isDrawerOpen} onChangeState={setIsDrawerOpen}>
+                <UserEditForm user={selectedUser} onSubmit={setNewData}></UserEditForm>
             </ToggleSidebar>
 
             <CardContainer>
                 {
-                     userList.map((item, index) => <UserCard key={index} user={item} onEdit={onEdit}/>)
+                    userList.map((item, index) => <UserCard key={index} user={item} onEdit={onEdit}/>)
                 }
             </CardContainer>
         </Layout>
