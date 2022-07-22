@@ -7,6 +7,7 @@ import Title from "../components/common/Title";
 import CardContainer from "../components/common/CardContainer";
 import {useState} from "react";
 import {ToggleSidebar} from "../components/Sidebar";
+import UserEditForm from "../components/UserEditForm";
 
 
 const UserList = () => {
@@ -37,16 +38,12 @@ const UserList = () => {
             </div>
 
             <ToggleSidebar open={toggle} onChangeState={setToggle} header={TitleSidebar}>
-                <div>
-                    {JSON.stringify(selectedUser)}
-                </div>
+                <UserEditForm user={selectedUser}></UserEditForm>
             </ToggleSidebar>
 
             <CardContainer>
                 {
-                     userList.map((item, index) =>
-                        <UserCard key={index} user={item} onEdit={onEdit}></UserCard>
-                    )
+                     userList.map((item, index) => <UserCard key={index} user={item} onEdit={onEdit}/>)
                 }
             </CardContainer>
         </Layout>

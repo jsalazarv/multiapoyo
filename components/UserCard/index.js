@@ -17,12 +17,9 @@ export default function ({user, onEdit}) {
     return (
         <Card rounded>
             <button onClick={editHandler}>edit</button>
-            <Avatar size={100} url={user.avatar}/>
-            <Title>{user.first_name}</Title>
-            <Caption>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet cum cupiditate dicta distinctio
-                ducimus eaque ex harum illo inventore ipsa itaque iusto, laborum
-            </Caption>
+            <Avatar size={100} url={user?.avatar}/>
+            <Title>{`${user?.first_name} ${user?.last_name}`}</Title>
+            <Caption>{user?.email}</Caption>
             <CardActions>
                 <Button>See posts</Button>
                 <Button>See albums</Button>
