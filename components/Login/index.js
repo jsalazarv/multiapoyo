@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {authenticate} from "../../pages/api/Auth";
 import {useMutation} from "@tanstack/react-query";
+import { useDispatch } from 'react-redux'
+import {setToken} from "../../store/auth";
 
 const schema = yup.object({
     email: yup.string().required('This field is required').email('This field must be an email'),
@@ -15,12 +17,14 @@ export default function Login() {
         resolver: yupResolver(schema)
     });
     const [errorMessage, setErrorMessage] = useState(null);
+    const dispatch = useDispatch();
     const login = useMutation( (credentials) => authenticate(credentials));
 
     const onSubmit = async (credentials) => {
         try {
             const {token} = await login.mutateAsync(credentials);
-            //TOD0: Set token in the store
+
+            dispatch(setToken(token));
         } catch (error) {
             setErrorMessage(error.response?.data?.error);
         }
