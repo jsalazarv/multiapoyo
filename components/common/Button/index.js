@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 export default styled.button`
-  background: ${props => props.primary ? "palevioletred" : "white"};
-  color: ${props => props.primary ? "white" : "palevioletred"};
+  background-color: ${props => props.background ? props.background : "palevioletred"};
+  color: ${props => props.color ? props.color : "white"};
   font-size: 1em;
-  margin: 5px 0;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid ${props => props.background ? props.background : "white"};
   border-radius: 3px;
   width: 100%;
   transition: 0.3s ease-out;
+  text-transform: uppercase;
 
   &:hover {
-    background-color: ${props => props.primary ? "white" : "palevioletred"};
     color: #ffffff;
     transition: 0.3s ease-in;
+    opacity: 0.8;
   }
 `;

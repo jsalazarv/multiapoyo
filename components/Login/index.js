@@ -4,6 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {authenticate} from "../../pages/api/Auth";
 import {useAuthContext} from "../../hooks/useAuthContext";
+import Title from "../common/Title";
+import Caption from "../common/Caption";
+import Button from "../common/Button";
+import ErrorMessage from "../common/ErrorMessage";
+import Input from "../common/Input";
 
 const schema = yup.object({
     email: yup.string().required('This field is required').email('This field must be an email'),
@@ -27,19 +32,23 @@ export default function Login() {
 
     return (
         <>
+            <Title>Sign In</Title>
+
+            <ErrorMessage hidden={!isError}>Authentication error: {errorMessage}</ErrorMessage>
+            <Caption>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </Caption>
+
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register("email")} />
-                <p>{errors.email?.message}</p>
+                <Input {...register("email")} />
+                <ErrorMessage hidden={!errors.email}>{errors.email?.message}</ErrorMessage>
 
-                <input {...register("password")} />
-                <p>{errors.password?.message}</p>
+                <Input {...register("password")} />
+                <ErrorMessage hidden={!errors.password}>{errors.password?.message}</ErrorMessage>
 
-                <button type="submit" disabled={ isLoading }>Send</button>
-                {isError && (
-                    <p>
-                        Authentication error: {errorMessage}
-                    </p>
-                )}
+
+                <Button type="submit" background="#2F6496" disabled={ isLoading }>Sign In</Button>
+
             </form>
         </>
     );
