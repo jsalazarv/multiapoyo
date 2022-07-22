@@ -1,6 +1,10 @@
+import Layout from "../components/Layout";
+
 const UserList = () => {
     return (
-        <div>User list</div>
+        <Layout>
+            User list
+        </Layout>
     );
 };
 

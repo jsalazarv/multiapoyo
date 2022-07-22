@@ -1,16 +1,38 @@
-const Layout = (props) => (
-    <div>
-        <nav>
-            Navbar
-        </nav>
+import {useAuthContext} from "../hooks/useAuthContext";
+import {useEffect} from "react";
+import {useRouter} from "next/router";
 
-        { props.children }
+const Layout = (props) => {
+    const {isAuthenticated, logout} = useAuthContext();
+    const router = useRouter();
 
-        <footer>
-            Footer
-        </footer>
-    </div>
-);
+
+    useEffect(() => {
+        if(!isAuthenticated) {
+            router.push('/');
+        }
+    }, [isAuthenticated]);
+
+    if(!isAuthenticated) {
+        //TODO: return loader component
+        return "Loading..."
+    }
+
+    return (
+        <div>
+            <nav>
+                Navbar
+                <button onClick={logout}>Logout</button>
+            </nav>
+
+            {props.children}
+
+            <footer>
+                Footer
+            </footer>
+        </div>
+    );
+};
 
 
 export default Layout;

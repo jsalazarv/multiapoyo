@@ -3,9 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {authenticate} from "../../pages/api/Auth";
-import {useMutation} from "@tanstack/react-query";
-import { useDispatch } from 'react-redux'
-import {setToken} from "../../store/auth";
+import {useAuthContext} from "../../hooks/useAuthContext";
 
 const schema = yup.object({
     email: yup.string().required('This field is required').email('This field must be an email'),
@@ -17,14 +15,11 @@ export default function Login() {
         resolver: yupResolver(schema)
     });
     const [errorMessage, setErrorMessage] = useState(null);
-    const dispatch = useDispatch();
-    const login = useMutation( (credentials) => authenticate(credentials));
+    const {login, isLoading, isSuccess, isError, isAuthenticated} = useAuthContext();
 
     const onSubmit = async (credentials) => {
         try {
-            const {token} = await login.mutateAsync(credentials);
-
-            dispatch(setToken(token));
+           await login(credentials);
         } catch (error) {
             setErrorMessage(error.response?.data?.error);
         }
@@ -39,8 +34,8 @@ export default function Login() {
                 <input {...register("password")} />
                 <p>{errors.password?.message}</p>
 
-                <button type="submit" disabled={ login.isLoading }>Send</button>
-                {login.isError && (
+                <button type="submit" disabled={ isLoading }>Send</button>
+                {isError && (
                     <p>
                         Authentication error: {errorMessage}
                     </p>

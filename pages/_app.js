@@ -8,18 +8,21 @@ let persistor = persistStore(store);
 
 import '../styles/globals.css'
 import {PersistGate} from "redux-persist/integration/react";
+import {AuthProvider} from "../providers/AuthContextProvider";
 
 function MyApp({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient());
 
   return (
       <Provider store={store}>
-          <QueryClientProvider client={queryClient}>
-              <PersistGate loading={null} persistor={persistor}>
-                  <Component {...pageProps} />
-                  <ReactQueryDevtools initialIsOpen={false} />
-              </PersistGate>
-          </QueryClientProvider>
+          <PersistGate loading={null} persistor={persistor}>
+              <QueryClientProvider client={queryClient}>
+                <AuthProvider>
+                      <Component {...pageProps} />
+                      <ReactQueryDevtools initialIsOpen={false} />
+                </AuthProvider>
+              </QueryClientProvider>
+          </PersistGate>
       </Provider>
   );
 }
