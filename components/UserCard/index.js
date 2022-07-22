@@ -7,7 +7,7 @@ import CardActions from "../common/CardActions";
 
 export default function ({user}) {
     return (
-        <Card>
+        <Card rounded>
             <Avatar size={100} url={user.avatar}/>
             <Title>{user.first_name}</Title>
             <Caption>
@@ -15,8 +15,8 @@ export default function ({user}) {
                 ducimus eaque ex harum illo inventore ipsa itaque iusto, laborum
             </Caption>
             <CardActions>
-                <Button>Post</Button>
-                <Button>Albums</Button>
+                <Button>See posts</Button>
+                <Button>See albums</Button>
             </CardActions>
         </Card>
     );

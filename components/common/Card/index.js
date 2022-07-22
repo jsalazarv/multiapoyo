@@ -4,7 +4,7 @@ export default styled.div`
   @media only screen and (min-width : 320px) {
     align-items: center;
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: ${props => props.rounded ? "15px" : "0"};
     border: 1px solid rgba(0,0,0,.125);
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ export default styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 5px;
-    width: 18rem;
+    width: ${props => props.dense ? "10rem" : "25rem"};
     transition: 0.3s ease-out;
     
     &:hover {
