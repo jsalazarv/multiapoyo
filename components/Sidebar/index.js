@@ -21,7 +21,7 @@ export const ToggleSidebar = ({open = false, onChangeState, children, header}) =
         <Sidebar className={`${isOpen === true ? 'active' : ''}`}>
             <div className="sd-header">
                 {header}
-                <Button className="btn btn-primary" onClick={toggleSidebar}>x</Button>
+                <Button onClick={toggleSidebar}>x</Button>
             </div>
             <div className="sd-body">
                 {children}
