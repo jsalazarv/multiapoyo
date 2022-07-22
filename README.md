@@ -1,6 +1,6 @@
 ## Multiapoyo
 
-# Install
+### Install
 
 - Clonar proyecto
 
