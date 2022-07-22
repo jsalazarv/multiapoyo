@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import Navbar from "./Navbar";
 import Container from "./common/Container";
 import Head from "next/head";
+import Sidebar from "./common/Sidebar";
 
 const Layout = (props) => {
     const {isAuthenticated, logout} = useAuthContext();
