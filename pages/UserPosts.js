@@ -8,6 +8,7 @@ import Title from "../components/common/Title";
 import Card from "../components/common/Card";
 import CardContainer from "../components/common/CardContainer";
 import Caption from "../components/common/Caption";
+import IconButton from "../components/common/IconButton";
 
 const UserPosts = () => {
     const router = useRouter();
@@ -48,7 +49,9 @@ const UserPosts = () => {
             <CardContainer mt="50px">
                 {posts && posts.map((item) => (
                     <Card mb="10px" key={item.id} maxWidthMd="250px">
-                        <button onClick={() => deletePost(item.id)}>Eliminar</button>
+                        <IconButton background="#02BDC1" ml="20px" fontSize="10px" size="30px" onClick={() => deletePost(item.id)}>
+                            <i className="fas fa-trash"></i>
+                        </IconButton>
                         <Avatar size={150} url={`https://picsum.photos/id/${item.id}/200/300`} tile/>
                         <Title fontSize="15px"> {item.title} </Title>
                         <Caption>{item.body}</Caption>
