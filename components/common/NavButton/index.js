@@ -4,9 +4,11 @@ export default styled.a`
   color: ${props => props.primary ? "white" : "palevioletred"};
   font-size: 1em;
   padding: 0.25em 1em;
+  border-radius: 3px;
   transition: 0.3s ease-out;
   &:hover {
-    transition: 0.2s ease-in;
-    border-bottom: solid 2px palevioletred;
+    background-color: ${props => props.primary ? "white" : "palevioletred"};
+    color: #ffffff;
+    transition: 0.3s ease-in;
   }
 `;
