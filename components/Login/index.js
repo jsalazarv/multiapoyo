@@ -43,7 +43,7 @@ export default function Login() {
                 <Input {...register("email")} />
                 <ErrorMessage hidden={!errors.email}>{errors.email?.message}</ErrorMessage>
 
-                <Input {...register("password")} />
+                <Input type="password" {...register("password")} />
                 <ErrorMessage hidden={!errors.password}>{errors.password?.message}</ErrorMessage>
 
 
