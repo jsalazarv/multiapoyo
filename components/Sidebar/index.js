@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import Sidebar from "../common/Sidebar";
 import SidebarOverlay from "../common/SidebarOverlay";
 import Button from "../common/Button";
+import IconButton from "../common/IconButton";
 
 export const ToggleSidebar = ({open = false, onChangeState, children}) => {
     const [isOpen, setIsOpen] = useState(open);
@@ -19,7 +20,9 @@ export const ToggleSidebar = ({open = false, onChangeState, children}) => {
         <>
         <Sidebar className={`${isOpen === true ? 'active' : ''}`}>
             <div className="sd-header">
-                <Button onClick={toggleSidebar}>x</Button>
+                <IconButton background="gray" ml="10px" fontSize="10px" size="20px" onClick={toggleSidebar}>
+                    <i className="fas fa-times"></i>
+                </IconButton>
             </div>
             <div className="sd-body">
                 {children}

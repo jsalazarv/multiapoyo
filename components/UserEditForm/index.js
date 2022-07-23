@@ -5,6 +5,7 @@ import FormWrap from "../common/FormWrap";
 import {useEffect, useState} from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import IconButton from "../common/IconButton";
 
 
 export default function ({user, onSubmit}) {
@@ -55,7 +56,11 @@ export default function ({user, onSubmit}) {
                 <Avatar size="100" url={user?.avatar}/>
             </div>
             <div>
-                {editUser && <button onClick={editHandler}>E</button>}
+                {editUser && (
+                    <IconButton background="#02BDC1" cfontSize="10px" size="30px" onClick={editHandler}>
+                        <i className="fas fa-edit"></i>
+                    </IconButton>
+                )}
                 {editUser && <Title>{`${ name } ${lastName}`}</Title>}
 
                 {!editUser && <Input placeholder="Name" onChange={handleName} value={name}/>}
@@ -63,7 +68,7 @@ export default function ({user, onSubmit}) {
 
                 {editUser && <Caption>{email}</Caption>}
                 {!editUser && <Input placeholder="Email" onChange={handleEmail} value={email}></Input>}
-                {!editUser && <Button onClick={saveChanges}>Guardar</Button>}
+                {!editUser && <Button background="#02BDC1" onClick={saveChanges}>Guardar</Button>}
             </div>
         </FormWrap>
     );
