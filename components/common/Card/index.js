@@ -8,25 +8,35 @@ export default styled.div`
     border: 1px solid rgba(0,0,0,.125);
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
     padding: 40px 10px;
     position: relative;
     text-align: center;
     width: 100%;
+    ${props => props.maxWidth ? `max-width: ${props.maxWidth}` : null};
+    margin-bottom: ${props => props.mb ? `${props.mb}` : "10px"};
+    margin-top: ${props => props.mt ? `${props.mt}` : "10px"};
+    margin-left: ${props => props.ml ? `${props.ml}` : "0"};
+    margin-right: ${props => props.mr ? `${props.mr}` : "0"};
   }
 
   @media only screen and (min-width : 768px) {
     width: 47%;
     display: inline-flex;
-    margin: 10px;
+    margin-bottom: ${props => props.mb ? `${props.mb}` : "10px"};
+    margin-top: ${props => props.mt ? `${props.mt}` : "10px"};
+    margin-left: ${props => props.ml ? `${props.ml}` : "10px"};
+    margin-right: ${props => props.mr ? `${props.mr}` : "10px"};
   }
 
   @media only screen and (min-width : 992px) {
     display: flex;
     flex-direction: column;
-    margin: 0 5px;
     width: ${props => props.dense ? "10rem" : "25rem"};
     transition: 0.3s ease-out;
+    margin-bottom: ${props => props.mb ? `${props.mb}` : "0"};
+    margin-top: ${props => props.mt ? `${props.mt}` : "0"};
+    margin-left: ${props => props.ml ? `${props.ml}` : "5px"};
+    margin-right: ${props => props.mr ? `${props.mr}` : "5px"};
     
     &:hover {
       box-shadow: -2px 8px 20px -12px rgba(0,0,0,0.75);
