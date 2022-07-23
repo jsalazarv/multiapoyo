@@ -5,6 +5,7 @@ import Card from "../common/Card";
 import Button from "../common/Button";
 import CardActions from "../common/CardActions";
 import {useState} from "react";
+import router from "next/router";
 
 
 export default function ({user, onEdit}) {
@@ -12,6 +13,13 @@ export default function ({user, onEdit}) {
 
     const editHandler = () => {
         onEdit && onEdit(user);
+    }
+
+    const handleSeeAlbums = () => {
+        router.push({
+            pathname: 'UserAlbum',
+            query: {id: user.id}
+        });
     }
 
     return (
@@ -22,7 +30,7 @@ export default function ({user, onEdit}) {
             <Caption>{user?.email}</Caption>
             <CardActions>
                 <Button>See posts</Button>
-                <Button>See albums</Button>
+                <Button onClick={handleSeeAlbums}>See albums</Button>
             </CardActions>
         </Card>
     );
