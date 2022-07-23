@@ -12,7 +12,7 @@ export default styled.div`
     position: relative;
     text-align: center;
     width: 100%;
-    ${props => props.maxWidth ? `max-width: ${props.maxWidth}` : null};
+    ${props => props.maxWidthXs ? `max-width: ${props.maxWidthXs}` : null};
     margin-bottom: ${props => props.mb ? `${props.mb}` : "10px"};
     margin-top: ${props => props.mt ? `${props.mt}` : "10px"};
     margin-left: ${props => props.ml ? `${props.ml}` : "0"};
@@ -20,8 +20,8 @@ export default styled.div`
   }
 
   @media only screen and (min-width : 768px) {
-    width: 47%;
     display: inline-flex;
+    ${props => props.maxWidthSm ? `max-width: ${props.maxWidthSm}` : null};
     margin-bottom: ${props => props.mb ? `${props.mb}` : "10px"};
     margin-top: ${props => props.mt ? `${props.mt}` : "10px"};
     margin-left: ${props => props.ml ? `${props.ml}` : "10px"};
@@ -33,6 +33,7 @@ export default styled.div`
     flex-direction: column;
     width: ${props => props.dense ? "10rem" : "25rem"};
     transition: 0.3s ease-out;
+    ${props => props.maxWidthMd ? `max-width: ${props.maxWidthMd}` : null};
     margin-bottom: ${props => props.mb ? `${props.mb}` : "0"};
     margin-top: ${props => props.mt ? `${props.mt}` : "0"};
     margin-left: ${props => props.ml ? `${props.ml}` : "5px"};

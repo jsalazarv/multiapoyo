@@ -34,7 +34,7 @@ const UserAlbum = () => {
 
             <CardContainer mt="50px">
                 {albums && albums.map((item) => (
-                    <Card mb="10px" key={item.id} maxWidth="250px">
+                    <Card mb="10px" key={item.id} maxWidthMd="250px">
                         <Avatar size={150} url={`https://picsum.photos/id/${item.id}/200/300`} tile/>
                         <Title fontSize="15px"> {item.title} </Title>
                     </Card>

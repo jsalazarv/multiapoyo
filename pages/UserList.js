@@ -52,7 +52,7 @@ const UserList = () => {
                 <UserEditForm user={selectedUser} onSubmit={setNewData}></UserEditForm>
             </ToggleSidebar>
 
-            <CardContainer>
+            <CardContainer colsXl="3" colsSm="3">
                 {
                     userList.map((item, index) => <UserCard key={index} user={item} onEdit={onEdit}/>)
                 }

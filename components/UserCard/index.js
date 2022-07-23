@@ -23,7 +23,7 @@ export default function ({user, onEdit}) {
     }
 
     return (
-        <Card rounded>
+        <Card maxWidthXs="350px" maxWidthSm="250px" maxWidthMd="300px" rounded mb="10px">
             <button onClick={editHandler}>edit</button>
             <Avatar size={100} url={user?.avatar}/>
             <Title>{`${user?.first_name} ${user?.last_name}`}</Title>
